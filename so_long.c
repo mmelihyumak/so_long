@@ -6,7 +6,7 @@
 /*   By: muyumak <muyumak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:38:36 by muyumak           #+#    #+#             */
-/*   Updated: 2023/01/29 06:47:36 by muyumak          ###   ########.fr       */
+/*   Updated: 2023/01/29 07:51:36 by muyumak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	draw_images(t_map *map)
 			}
 			else if (map->lines[i][j] == 'C')
 				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win, map->img_collectible, x, y);
+			else if (map->lines[i][j] == 'E')
+				mlx_put_image_to_window(map->mlx_ptr, map->mlx_win, map->img_escape, x, y);
 			x += 64;
 			j++;
 		}
@@ -47,67 +49,18 @@ int	draw_images(t_map *map)
 	return (1);
 }
 
-int	key_press(int key, t_map *map)
-{
-	if (key == 53)
-	{
-		mlx_destroy_window(map->mlx_ptr, map->mlx_win);
-		exit(1);
-	}
-	else if (key == 13)
-	{
-		if (map->lines[map->player_y / 64 - 1][map->player_x / 64] != '1')
-		{
-			mlx_clear_window(map->mlx_ptr, map->mlx_win);
-			map->lines[map->player_y / 64][map->player_x / 64] = '0';
-			map->lines[map->player_y / 64 - 1][map->player_x / 64] = 'P';
-			draw_images(map);
-		}
-	}
-	else if (key == 1)
-	{
-		if (map->lines[map->player_y / 64 + 1][map->player_x / 64] != '1')
-		{
-			mlx_clear_window(map->mlx_ptr, map->mlx_win);
-			map->lines[map->player_y / 64][map->player_x / 64] = '0';
-			map->lines[map->player_y / 64 + 1][map->player_x / 64] = 'P';
-			draw_images(map);
-		}
-	}
-	else if (key == 0)
-	{
-		if (map->lines[map->player_y / 64][map->player_x / 64 - 1] != '1')
-		{
-			mlx_clear_window(map->mlx_ptr, map->mlx_win);
-			map->lines[map->player_y / 64][map->player_x / 64] = '0';
-			map->lines[map->player_y / 64][map->player_x / 64 - 1] = 'P';
-			draw_images(map);
-		}
-	}
-	else if (key == 2)
-	{
-		if (map->lines[map->player_y / 64][map->player_x / 64 + 1] != '1')
-		{
-			mlx_clear_window(map->mlx_ptr, map->mlx_win);
-			map->lines[map->player_y / 64][map->player_x / 64] = '0';
-			map->lines[map->player_y / 64][map->player_x / 64 + 1] = 'P';
-			draw_images(map);
-		}
-	}
-	printf("y: %d; x: %d\n", map->player_y / 64, map->player_x / 64);
-	return (0);
-}
-
 int	init_map(t_map *map)
 {
 	map->wall_path = "wall.xpm";
 	map->player_path = "player.xpm";
 	map->collectible_path = "collectible.xpm";
+	map->escape_path = "escape.xpm";
 	map->mlx_ptr = mlx_init();
 	map->mlx_win = mlx_new_window(map->mlx_ptr, 64 * map->width, 64 * map->height, "Hello World!");
 	map->img_wall = mlx_xpm_file_to_image(map->mlx_ptr, map->wall_path, &map->width, &map->height);
 	map->img_player = mlx_xpm_file_to_image(map->mlx_ptr, map->player_path, &map->width, &map->height);
 	map->img_collectible = mlx_xpm_file_to_image(map->mlx_ptr, map->collectible_path, &map->width, &map->height);
+	map->img_escape = mlx_xpm_file_to_image(map->mlx_ptr, map->escape_path, &map->width, &map->height);
 	if (!map->img_wall)
 		printf("error");
 	draw_images(map);

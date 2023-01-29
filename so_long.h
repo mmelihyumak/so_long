@@ -6,7 +6,7 @@
 /*   By: muyumak <muyumak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:39:27 by muyumak           #+#    #+#             */
-/*   Updated: 2023/01/29 06:45:53 by muyumak          ###   ########.fr       */
+/*   Updated: 2023/01/29 07:43:16 by muyumak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ typedef struct	s_map
 	char	*wall_path;
 	char	*player_path;
 	char	*collectible_path;
+	char	*escape_path;
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*img_wall;
 	void	*img_player;
 	void	*img_collectible;
+	void	*img_escape;
 	int		width;
 	int		height;	
 	int		len_of_line;
@@ -47,5 +49,8 @@ int		check_filename(char *argv);
 int		get_map_lines(t_map *map, char *filename);
 int		check_map(t_map *map);
 int		map_len(char *filename);
+int		key_press(int key, t_map *map);
+int		draw_images(t_map *map);
+int		init_map(t_map *map);
 
 #endif

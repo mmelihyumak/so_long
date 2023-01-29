@@ -4,7 +4,7 @@ MLX = ./minilibx/libmlx.a
 LIBFT = -I./libft
 GNL = $(wildcard get_next_line/*c)
 GNLOBJS = $(GNL:.c=.o)
-SRCS = so_long.c so_long_error.c so_long_utils.c so_long_check_map.c
+SRCS = so_long.c so_long_error.c so_long_utils.c so_long_check_map.c so_long_move.c
 OBJS = $(SRCS:.c=.o)
 NAME = so_long
 
