@@ -4,7 +4,7 @@ MLX = ./minilibx/libmlx.a
 LIBFT = -I./libft
 GNL = $(wildcard get_next_line/*c)
 GNLOBJS = $(GNL:.c=.o)
-SRCS = so_long.c so_long_error.c so_long_utils.c so_long_check_map.c so_long_move.c
+SRCS = so_long.c so_long_utils.c so_long_check_map.c so_long_move.c so_long_errno.c so_long_free.c
 OBJS = $(SRCS:.c=.o)
 NAME = so_long
 
@@ -17,9 +17,6 @@ $(MLX) :
 $(NAME) : $(OBJS) $(GNLOBJS)
 	gcc $(OBJS) $(GNLOBJS) $(LFLAGS) ./libft/libft.a -o $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
 	rm -rf $(OBJS) $(NAME)
 
@@ -28,9 +25,6 @@ fclean:
 	rm -rf ./gnl/*.o
 	make clean -C ./minilibx
 	make fclean -C ./libft
-
-norm:
-	norminette ./*.c
 
 re : fclean all
 
