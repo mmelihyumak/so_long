@@ -6,7 +6,7 @@
 /*   By: muyumak <muyumak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:38:36 by muyumak           #+#    #+#             */
-/*   Updated: 2023/01/31 04:51:22 by muyumak          ###   ########.fr       */
+/*   Updated: 2023/02/01 03:07:37 by muyumak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	draw_images(t_map *map)
 
 int	init_map(t_map *map)
 {
-	map->wall_path = "wall.xpm";
-	map->player_path = "player.xpm";
-	map->collectible_path = "collectible.xpm";
-	map->escape_path = "escape.xpm";
+	map->wall_path = "./textures/wall.xpm";
+	map->player_path = "./textures/player.xpm";
+	map->collectible_path = "./textures/collectible.xpm";
+	map->escape_path = "./textures/escape.xpm";
 	map->mlx_ptr = mlx_init();
 	map->mlx_win = mlx_new_window(map->mlx_ptr, 64 * map->width,
 			64 * map->height, "so_long");
@@ -114,6 +114,7 @@ int	main(int argc, char **argv)
 		return (1);
 	free_lines(&map);
 	get_map_lines(&map, argv[1]);
+	write_movement_helper(&map);
 	init_map(&map);
 	return (0);
 }

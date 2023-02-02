@@ -6,7 +6,7 @@
 /*   By: muyumak <muyumak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:39:27 by muyumak           #+#    #+#             */
-/*   Updated: 2023/01/31 04:52:29 by muyumak          ###   ########.fr       */
+/*   Updated: 2023/02/01 03:07:10 by muyumak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	free_lines(t_map *map);
 int		find_escape(t_map *map);
 void	write_movement(t_map *map);
 int		helper_func(t_map *map);
+void	check_map_helper(t_map *map, int i);
+void	write_movement_helper(t_map *map);
 
 #endif
